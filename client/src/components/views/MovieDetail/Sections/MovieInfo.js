@@ -3,7 +3,7 @@ import {Descriptions} from 'antd'
 function MovieInfo(props) {
 
   let {movieInformation} = props
-  console.log(movieInformation)
+
   return (
     <Descriptions title="Movie Info" bordered>
       <Descriptions.item label="Title">{movieInformation.original_title}</Descriptions.item>

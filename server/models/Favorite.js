@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const favoriteSchema = mongoose.Schema({
   userFrom: {
-    type: Schema.Types.ObjectOd,
+    type: Schema.Types.ObjectId,
     ref:'User'
   },
   movieId: {
@@ -25,6 +25,6 @@ const favoriteSchema = mongoose.Schema({
 
 
 
-const Favorite = mongoose.model('Favorite', FavoriteSchema);
+const Favorite = mongoose.model('Favorite', favoriteSchema);
 
 module.exports = { Favorite }
