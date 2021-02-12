@@ -2,7 +2,7 @@ import React,{useEffect, useState, Fragment} from 'react'
 import { FaCode } from "react-icons/fa";
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
 import MainImage from './Sections/MainImage';
-import GridCard from '../Commons/GridCard'
+import GridCards from '../Commons/GridCards'
 import {Row} from 'antd'
 import { withRouter } from 'react-router-dom'
 
@@ -44,7 +44,7 @@ function LandingPage() {
 					<Row gutter={[16,16]}>
 						{Movies && Movies.map((movie,index) => (
 							<Fragment key={index}>
-								<GridCard 
+								<GridCards 
 									landingPage
 									image={movie.poster_path ?
 										`${IMAGE_BASE_URL}w500${movie.poster_path}`: null}

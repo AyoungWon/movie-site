@@ -1,20 +1,22 @@
-import React, {useEffect, useState, Fragment} from 'react'
-import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
-import MainImage from '../LandingPage/Sections/MainImage';
+import React, { useEffect, useState } from 'react'
+import { List, Avatar, Row, Col, Button } from 'antd';
+
+
+import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config'
+import GridCards from '../Commons/GridCards'
+import MainImage from '../../views/LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
-import GridCard from '../Commons/GridCard'
-import { Row } from 'antd'
-import { withRouter } from 'react-router-dom'
 import Favorite from './Sections/Favorite';
+function MovieDetailPage(props) {
 
-function MovieDetail(props) {
-let movieId = props.match.params.movieId
-console.log(props.match)
-const [Movie, setMovie] = useState([])
-const [Casts, setCasts] = useState([])
-const [ActorToggle, setActorToggle] = useState(false)
+    const movieId = props.match.params.movieId
+    const [Movie, setMovie] = useState([])
+    const [Casts, setCasts] = useState([])
 
-  useEffect(() => {
+    const [ActorToggle, setActorToggle] = useState(false)
+
+
+useEffect(() => {
     console.log(localStorage.getItem('userId'))
     let endpointCrew = `${API_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
     let endpointInfo = `${API_URL}/movie/${movieId}?api_key=${API_KEY}`
@@ -33,12 +35,14 @@ const [ActorToggle, setActorToggle] = useState(false)
       })
   }, [])
 
-  const toggleActprView = () => {
-    setActorToggle(!ActorToggle)
-  }
+    const toggleActorView = () => {
+        setActorToggle(!ActorToggle)
+    }
 
-  return (
-    <div>
+
+
+
+    return (<div>
       <MainImage
       image={`${IMAGE_BASE_URL}w1280${Movie.backdrop_path}`}
       title={Movie.original_title}
@@ -53,13 +57,13 @@ const [ActorToggle, setActorToggle] = useState(false)
         />
         <br />
         <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem'}}>
-          <button onClick={toggleActprView}> Toggle Actor View</button>
+          <button onClick={toggleActorView}> Toggle Actor View</button>
         </div>
         {ActorToggle &&
                 <Row gutter={[16,16]}>
                 {Casts && Casts.map((cast,index) => (
                   <React.Fragment key={index}>
-                    <GridCard 
+                    <GridCards 
                       image={cast.profile_path ?
                         `${IMAGE_BASE_URL}w500${cast.profile_path}`: null}
                       characterName={cast.name}
@@ -71,7 +75,8 @@ const [ActorToggle, setActorToggle] = useState(false)
 
       </div>
     </div>
-  )
+    )
 }
 
-export default withRouter(MovieDetail)
+export default MovieDetailPage
+

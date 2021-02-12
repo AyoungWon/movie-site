@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col} from 'antd'
 
-function GridCard(props) {
+function GridCards(props) {
 
   if(props.landingPage){
     return (
@@ -33,4 +33,4 @@ function GridCard(props) {
 
 }
 
-export default GridCard
+export default GridCards
