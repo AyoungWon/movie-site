@@ -3,20 +3,20 @@ import React, { useEffect, useState } from 'react'
 
 function Favorite(props) {
 const movieId = props.movieId
-const userForm = props.userFrom
+const userFrom = props.userFrom
 const movieTitle = props.movieInfo.title
 const moviePost = props.movieInfo.backdrop_path
-const movieRuntime = props.movieInfo.runtime
+const movieRunTime = props.movieInfo.runtime
 
 const [FavoriteNumber, setFavoriteNumber] = useState(0)
 const [Favorited, setFavorited] = useState(false)
 
 let variables = {
-  userForm,
-  movieId,
-  movieTitle,
-  moviePost,
-  movieRuntime
+  userFrom: userFrom,
+  movieId: movieId,
+  movieTitle: movieTitle,
+  moviePost: moviePost,
+  movieRunTime: movieRunTime
 }
   useEffect(() => {
 
@@ -45,6 +45,7 @@ let variables = {
     if(Favorited){
       axios.post('/api/favorite/removeFromFavorite', variables)
       .then(response => {
+        console.log(response.data)
         if(response.data.success){
           setFavoriteNumber(FavoriteNumber - 1)
           setFavorited(!Favorited)
