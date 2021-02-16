@@ -8,8 +8,9 @@ function MainImage (props) {
         100%),
         url(${props.image}), #1c1c1c`,
       height: '500px',
-      backgroundSize: '100%, cover',
+      backgroundSize: '100% 100%',
       backgroundPosition: 'center top',
+      backgroundRepeat: 'no-repeat',
       width: '100%',
       position: 'relative'
     } }>

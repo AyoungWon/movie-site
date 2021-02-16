@@ -12,7 +12,7 @@ function MovieDetailPage(props) {
     const movieId = props.match.params.movieId
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
-
+    const [TrailerKey, setTrailerKey] = useState()
     const [ActorToggle, setActorToggle] = useState(false)
 
 
@@ -20,6 +20,7 @@ useEffect(() => {
     console.log(localStorage.getItem('userId'))
     let endpointCrew = `${API_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
     let endpointInfo = `${API_URL}/movie/${movieId}?api_key=${API_KEY}&language=ko`
+    let endpointTrailer = `${API_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=ko`
 
     fetch(endpointInfo)
       .then(response => response.json())
@@ -33,6 +34,13 @@ useEffect(() => {
         console.log("crew", response)
         setCasts(response.cast)
       })
+      fetch(endpointTrailer)
+      .then(response => response.json())
+      .then(response => {
+        setTrailerKey(response.results[0].key)
+        
+      })
+
   }, [])
 
     const toggleActorView = () => {
@@ -56,6 +64,15 @@ useEffect(() => {
         movieInformation={Movie}
         />
         <br />
+        <div style={{width:'100%', display:'flex', justifyContent:'center'}}>
+          <iframe width="854" height="480" src={`https://www.youtube.com/embed/${TrailerKey}`}
+          
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+          </iframe>
+        </div>
+        
         <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem'}}>
           <button onClick={toggleActorView}> Toggle Actor View</button>
         </div>
