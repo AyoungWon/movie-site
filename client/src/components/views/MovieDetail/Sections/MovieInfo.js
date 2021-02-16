@@ -6,7 +6,7 @@ function MovieInfo(props) {
 
   return (
     <Descriptions title="Movie Info" bordered>
-      <Descriptions.item label="Title">{movieInformation.original_title}</Descriptions.item>
+      <Descriptions.item label="Title">{movieInformation.title}</Descriptions.item>
       <Descriptions.item label="release_date">{movieInformation.release_date}</Descriptions.item>
       <Descriptions.item label="revenue">{movieInformation.revenue}</Descriptions.item>
       <Descriptions.item label="runtime">{movieInformation.runtime}</Descriptions.item>

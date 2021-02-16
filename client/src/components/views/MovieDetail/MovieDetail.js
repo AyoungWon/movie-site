@@ -19,7 +19,7 @@ function MovieDetailPage(props) {
 useEffect(() => {
     console.log(localStorage.getItem('userId'))
     let endpointCrew = `${API_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
-    let endpointInfo = `${API_URL}/movie/${movieId}?api_key=${API_KEY}`
+    let endpointInfo = `${API_URL}/movie/${movieId}?api_key=${API_KEY}&language=ko`
 
     fetch(endpointInfo)
       .then(response => response.json())
@@ -45,7 +45,7 @@ useEffect(() => {
     return (<div>
       <MainImage
       image={`${IMAGE_BASE_URL}w1280${Movie.backdrop_path}`}
-      title={Movie.original_title}
+      title={Movie.title}
       text={Movie.overview}
       />
       <div style={{width: '85%', margin: '1rem auto'}}>
