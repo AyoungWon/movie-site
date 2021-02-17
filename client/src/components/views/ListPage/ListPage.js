@@ -7,13 +7,20 @@ import {Row,} from 'antd'
 
 function ListPage(props) {
   const movieName = props.match.params.movieName
+  const movieGenre = props.match.params.genre
   const [Movies, setMovies] = useState([])
   const [PageNumber, setPageNumber] = useState(0)
   const [CurrentPage, setCurrentPage] = useState(0)
 
   useEffect(() => {
-    const endpoint = `${API_URL}/search/movie?api_key=${API_KEY}&query=${movieName}&language=ko`
-    fetchMovie(endpoint)
+    if(movieName) {
+      const endpoint = `${API_URL}/search/movie?api_key=${API_KEY}&query=${movieName}&language=ko`
+      fetchMovie(endpoint)
+    } else {
+      const endpoint = `${API_URL}/discover/movie?api_key=${API_KEY}&language=ko&region=KR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${movieGenre}`
+      fetchMovie(endpoint)
+    }
+    
   }, [])
 
   const fetchMovie = (endpoint) => {
@@ -27,8 +34,14 @@ function ListPage(props) {
     })
   }
   const loadMoreItem = () => {
-		const endpoint = 	`${API_URL}/search/movie?api_key=${API_KEY}&query=${movieName}&language=ko&page=${CurrentPage + 1}`
-		fetchMovie(endpoint)
+    if(movieName){
+      const endpoint = 	`${API_URL}/search/movie?api_key=${API_KEY}&query=${movieName}&language=ko&page=${CurrentPage + 1}`
+		  fetchMovie(endpoint)
+    }else {
+      const endpoint = `${API_URL}/discover/movie?api_key=${API_KEY}&language=ko&region=KR&sort_by=popularity.desc&include_adult=false&include_video=false&page=${CurrentPage + 1}&with_genres=${movieGenre}`
+      fetchMovie(endpoint)
+    }
+		
 	}
   return (
     <div style={{ width : '85%', margin: '1rem auto'}}>

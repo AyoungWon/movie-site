@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
 import { Drawer, Button } from 'antd';
 import Icon, { AlignRightOutlined } from '@ant-design/icons'
 import './Sections/Navbar.css';
+import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config'
+import GenreList from './Sections/GenreList';
+
 
 function NavBar() {
   const [visible, setVisible] = useState(false)
   const [visibleTop, setvisibleTop] = useState(false)
   const [placement, setplacement] = useState('top')
+  const [Genres, setGenres] = useState([])
+  
+  useEffect(() => {
+    const genreList = `${API_URL}/genre/movie/list?api_key=${API_KEY}&language=ko`
+    fetch(genreList)
+    .then(response => response.json())
+    .then(response => {
+      setGenres([...response.genres])
+    })
+  }, [])
 
   const showDrawer = () => {
     setVisible(true)
@@ -28,10 +41,10 @@ function NavBar() {
   return (
     <nav style={{position: 'fixed', zIndex: 5, width: '100%'}}>
     <div className="menu" style={{ width:'100%', display:'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <div className="menu__logo">
+      <div className="menu__logo" style={{border:'1px solid red', minWidth:'50px'}}>
         <a href="/">Logo</a>
       </div>
-      <div className="menu__container" style={{width:'90%',display: 'flex', alignItems:'center', justifyContent: 'space-around'}}>
+      <div className="menu__container" style={{border:'1px solid red', width:'90%',display: 'flex', alignItems:'center', justifyContent: 'space-around'}}>
       <button id="category" onClick={showDrawerTop} >Category</button>
         <div className="menu_left" style={{minWidth: '60%'}}>
           <LeftMenu/>
@@ -63,16 +76,20 @@ function NavBar() {
     </div>
     <div>
     <Drawer
-          title="Basic Drawer"
+          title="Genres"
           placement={placement}
           closable={false}
           onClose={onCloseTop}
           visible={visibleTop}
           key={placement}
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <ul style={{display: 'flex', flexWrap: 'wrap'}}>
+            {Genres.map((genre, index)=> (
+              <Fragment key={index}>
+                <GenreList genre={genre}/>
+              </Fragment>
+            ))}
+          </ul>
         </Drawer>
     </div>
     </nav>

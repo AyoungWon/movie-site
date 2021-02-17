@@ -17,7 +17,7 @@ function LeftMenu(props) {
   const searchSubmit = (e) => {
       let movieName = Search.replaceAll(' ', '+')
       e.preventDefault() 
-      window.location.href=`/movieList/${movieName}`
+      window.location.href=`movie/search/${movieName}`
   }
 
   return (
