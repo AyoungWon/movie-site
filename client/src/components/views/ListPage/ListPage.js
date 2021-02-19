@@ -2,7 +2,7 @@ import React,{useState, useEffect, Fragment} from 'react'
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config'
 import GridCards from '../Commons/GridCards'
 import {Row,} from 'antd'
-
+import '../Commons/GridCards.css'
 
 
 function ListPage(props) {
@@ -45,7 +45,7 @@ function ListPage(props) {
 	}
   return (
     <div style={{ width : '85%', margin: '1rem auto'}}>
-      <Row gutter={[16,16]}>
+      <div className="grid-card-wrap">
         {Movies && Movies.map((movie,index) => (
           <Fragment key={index}>
             <GridCards 
@@ -57,7 +57,7 @@ function ListPage(props) {
               />
           </Fragment>
         ))}
-      </Row>
+      </div>
       {PageNumber > 1 ? (<div style={{ display: 'flex', justifyContent: 'center'}}>
         <button onClick={loadMoreItem}>Load More</button>
       </div>) : null}

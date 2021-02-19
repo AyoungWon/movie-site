@@ -1,70 +1,134 @@
-@import '~antd/dist/antd.css';
+/* @import '~antd/dist/antd.css'; */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+/* font-family: 'Lobster', cursive; */
+body {
+  line-height: normal !important;
+}
+
+nav {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Lobster', cursive;
+}
+
+nav button {
+  color: #777;
+  background-color: #ffbe44;
+  border: none;
+  font-weight: bold;
+}
+
+nav  a {
+  color: #777;
+}
 
 .menu {
   padding: 0 20px;
-  border-bottom: solid 1px #e8e8e8;
   overflow: auto;
-  box-shadow: 0 0 30px #f3f1f1;
-  background-color: white;
+  /* box-shadow: 0 0 10px #f3f1f1; */
+  background-color: #ffbe44;
+  width:100%;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px
 
 }
 
-.menu__logo {
-  float: left;
 
+
+
+
+
+
+
+.menu__logo {
+  max-width:200px;
+ 
 }
 
 .menu__logo a {
-  display: inline-block;
-  font-size: 20px;
-  padding: 19px 20px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.menu__logo a > div {
+  width: 25%;
+}
+
+.menu__logo img {
+  width: 100%;
+}
+
+.menu__logo h1 {
+  font-size: 2rem;
+  color: #fff;
+
+  margin-bottom: 0 !important;
+  font-weight: bold;
+  position: absolute;
+  text-shadow:
+  1px -1px 0 #777,
+  1px -1px 0 #777
   
 }
 
-.navMenu {
-  display:flex;
-  color: black;
-  justify-content: space-evenly;
+.menu_left {
+  min-width: 40%;
+  display: flex;
 }
 
-.navMenu  a {
-  color: #000;
+.menu_left .search-wrap {
+ /*  border: 1px solid black; */
+width: 500px;
 }
 
-button {
+.menu_left .search-bar {
+  padding: 0.5rem;
+}
+
+.menu_left .search-input {
+  width: 90%;
   border: none;
+  height: 2rem;
   background-color: #fff;
-  padding: 0;
+  border-radius: 10px;
+  padding: 0 8px;
+  margin-right: 10px;
 }
-/* .menu__container {
+
+
+.menu_right {
+  width: 15%;
+  padding: 5px 10px;
+}
+
+.menu_right .navMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 10px blue;
 
 }
 
-.menu__container .ant-menu-item {
-  padding: 0px 5px;
+.menu_right ul {
+  margin-bottom: 0 !important;
 }
 
-.menu__container .ant-menu-submenu-title {
-  padding: 10px 20px;
+.menu_right ul li a:hover {
+  color: red;
+  
+ 
 }
 
-.menu__container .ant-menu-item a,
-.menu__container .ant-menu-submenu-title a {
-  padding: 10px 15px;
-}
 
-.menu__container .ant-menu-horizontal {
-  border-bottom: none;
-}
 
-.menu__container .menu_left {
-  float: left;
-}
 
-.menu__container .menu_right {
-  float: right;
-}
- */
 .menu__mobile-button {
   float: right;
   height: 32px;
@@ -94,8 +158,11 @@ button {
     display: none;
   }
 
+
+
   .menu__logo a {
     margin-left: -20px;
+    width: 100%;
   }
 
   .menu__container .ant-menu-item,

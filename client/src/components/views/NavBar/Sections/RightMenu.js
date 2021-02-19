@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 function RightMenu(props) {
   const user = useSelector(state => state.user)
-  const [visibleTop, setvisibleTop] = useState(false)
+
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
@@ -19,17 +19,15 @@ function RightMenu(props) {
     });
   };
 
-  const showDrawer = () => {
-    setvisibleTop(true)
-  };
+
   if (user.userData && !user.userData.isAuth) {
     return (
       <ul className='navMenu'>
 
-        <li key="mail" >
+        <li  >
           <a href="/login">Signin</a>
         </li>
-        <li  key="app">
+        <li >
           <a href="/register">Signup</a>
         </li>
       </ul>

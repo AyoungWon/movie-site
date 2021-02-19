@@ -39,19 +39,23 @@ function NavBar() {
   };
 
   return (
-    <nav style={{position: 'fixed', zIndex: 5, width: '100%'}}>
-    <div className="menu" style={{ width:'100%', display:'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <div className="menu__logo" style={{border:'1px solid red', minWidth:'50px'}}>
-        <a href="/">Logo</a>
+    <nav >
+    <div className="menu">
+      <div className="menu__logo" >
+        <a href="/"  >
+          <div>
+          <img src="/img/popcorn.png" />
+          </div>
+         
+        <h1>Movie Pop</h1>
+        </a>
       </div>
-      <div className="menu__container" style={{border:'1px solid red', width:'90%',display: 'flex', alignItems:'center', justifyContent: 'space-around'}}>
-      <button id="category" onClick={showDrawerTop} >Category</button>
-        <div className="menu_left" style={{minWidth: '60%'}}>
+     
+        <div className="menu_left" >
           <LeftMenu/>
+          <button id="category" onClick={showDrawerTop} >Category</button>
         </div>
-        
-        <div className="menu_right" style={{width: '20%'}}>
- 
+        <div className="menu_right" >
           <RightMenu/>
         </div>
         <Button
@@ -72,7 +76,7 @@ function NavBar() {
           <button onClick={showDrawerTop} >Category</button>
           <RightMenu mode="inline" />
         </Drawer>
-      </div>
+      
     </div>
     <div>
     <Drawer

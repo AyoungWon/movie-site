@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 function LeftMenu(props) {
-  const [Search, setSerch] = useState('')
+  const [Search, setSerch] = useState()
 
   const onChangeSerch = (e) => {
     setSerch(e.currentTarget.value)
@@ -15,22 +16,31 @@ function LeftMenu(props) {
   }
 
   const searchSubmit = (e) => {
+    e.preventDefault() 
+    if(Search){
       let movieName = Search.replaceAll(' ', '+')
-      e.preventDefault() 
       window.location.href=`movie/search/${movieName}`
+    }
+    
   }
 
   return (
 
-    <div key="favorite" style={{border: '1px solid black'}}>
-      <form type='text' style={{padding: '0.5rem'}}>
-        <input value={Search} 
+    <div className="search-wrap">
+      <form className="search-bar" type='text' >
+        <input  
+        className="search-input"
+        value={Search} 
         onKeyDown={enterHandler}
         onChange={onChangeSerch} 
         placeholder='Search'
-        style={{width: '90%',border: 'none', height: '2rem'}}></input>
-        <button onClick={searchSubmit}
-        style={{border:'none', backgroundColor: '#fff'}}>Go</button>
+        ></input>
+        <button 
+        className="search-btn"
+        onClick={searchSubmit}
+        >
+          <FontAwesomeIcon icon={faSearch}/>
+        </button>
       </form>
     </div>
 

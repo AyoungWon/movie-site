@@ -1,5 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart,  faHeartBroken} from '@fortawesome/free-solid-svg-icons'
 
 function Favorite(props) {
 const movieId = props.movieId
@@ -67,8 +69,8 @@ let variables = {
   }
   return (
     <div>
-      <button onClick={onClickFavorite}>
-        {Favorited ? "Not favorite" : "Add to favorite"} {FavoriteNumber}
+      <button id="favoriteBtn" onClick={onClickFavorite}>
+        {Favorited ? <FontAwesomeIcon icon={faHeartBroken}/> : <FontAwesomeIcon icon={faHeart}/>} {FavoriteNumber}
         </button>
     </div>
   )

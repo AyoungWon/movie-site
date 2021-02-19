@@ -5,6 +5,9 @@ import MainImage from './Sections/MainImage';
 import GridCards from '../Commons/GridCards'
 import {Row, Carousel} from 'antd'
 import { withRouter } from 'react-router-dom'
+import SlideCards from '../Commons/SlideCards';
+import '../Commons/SlideCard.css'
+import '../Commons/GridCards.css'
 
 
 function LandingPage() {
@@ -12,8 +15,8 @@ function LandingPage() {
 	const [Movies, setMovies] = useState([])
 	const [MainMovieImage, setMainMovieImage] = useState(null)
 	const [CurrentPage, setCurrentPage] = useState(0)
-	const [PlayingMovie1, setPlayingMovie1] = useState([])
-	const [PlayingMovie2, setPlayingMovie2] = useState([])
+	const [PlayingMovie, setPlayingMovie] = useState([])
+
 	const [HotMovies, setHotMovies] = useState([])
 	
 
@@ -28,16 +31,12 @@ function LandingPage() {
 		fetch(endpoint)
 		.then(response => response.json())
 		.then(response => {
-			const movies1 = response.results.slice(0,4)
-			const movies2 = response.results.slice(4,8)
-			return [movies1, movies2]
+			setPlayingMovie([...response.results])
+			console.log(response)
 		})
-		.then(response => {
-			setPlayingMovie1([...response[0]])
-			setPlayingMovie2([...response[1]])
-		}
+
 			
-		)
+		
 	}
 
 	const fetchMoviesHot = (endpoint) => {
@@ -57,78 +56,61 @@ function LandingPage() {
     return (
 			<div style={{width: '100%', margin: '0'}}>
 				{MainMovieImage && <MainImage 
+				landingPage
 				image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`}
 				title={MainMovieImage.original_title}
 				text={MainMovieImage.overview}/>
 				}
 				<div style={{ width : '85%', margin: '1rem auto'}}>	
-					<div>
-						<h2>Movies by latest</h2>
+					<div className="section" style={{marginTop: '50px'}}>
+						<h2>현재상영작</h2>
 						<hr/>
-						<Carousel  autoplay>
-							<div >
-								<div className='card-wrap' style={{display: 'flex'}}>
-									<div>
-										<Row gutter={[2,2]}>
-											{PlayingMovie1 && PlayingMovie1.map((movie,index) => (
-											<Fragment key={index}>
-											<GridCards 
+							<div className="slide-card-box">
+								<div className='slide-card-wrap' >
+									<ul className="scroller" >
+										{PlayingMovie && PlayingMovie.map((movie,index) => (
+										<Fragment key={index}>
+											<SlideCards
+											landingPage
+											index={index + 1}
+											image={movie.poster_path ?
+											`${IMAGE_BASE_URL}w300${movie.poster_path}`: null}
+											movieId={movie.id}
+											movieName={movie.title}
+											score={movie.vote_average}
+											/>
+										</Fragment>
+											))}
+									</ul>
+								</div>
+							</div>
+					</div>
+
+						<div className="section" style={{marginTop: '50px'}}>
+							<h2>Weekly Hot</h2>
+							<hr/>
+							<div className="slide-card-box">
+								<div className='slide-card-wrap' >
+									<ul className="scroller" >
+										{HotMovies && HotMovies.map((movie,index) => (
+										<Fragment key={index}>
+											<SlideCards
 											landingPage
 											index={index + 1}
 											image={movie.poster_path ?
 											`${IMAGE_BASE_URL}w300${movie.poster_path}`: null}
 											movieId={movie.id}
 											movieName={movie.original_title}
+											score={movie.vote_average}
 											/>
-											</Fragment>
+										</Fragment>
 											))}
-										</Row>
-									</div>
+									</ul>
 								</div>
 							</div>
-
-							<div >
-								<div className='card-wrap' style={{display: 'flex'}}>
-									<div>
-										<Row gutter={[2,2]}>
-											{PlayingMovie2 && PlayingMovie2.map((movie,index) => (
-											<Fragment key={index}>
-											<GridCards 
-											index={index + 5}
-											landingPage
-											image={movie.poster_path ?
-											`${IMAGE_BASE_URL}w300${movie.poster_path}`: null}
-											movieId={movie.id}
-											movieName={movie.original_title}
-											/>
-											</Fragment>
-											))}
-										</Row>
-									</div>
-								</div>
-							</div>
-						</Carousel>
-						<div>
-							<h2>Weekly Hot</h2>
-							<hr/>
-							<Row gutter={[16,16]}>
-								{HotMovies && HotMovies.map((movie,index) => (
-									<Fragment key={index}>
-										<GridCards 
-											landingPage
-											image={movie.poster_path ?
-												`${IMAGE_BASE_URL}w500${movie.poster_path}`: null}
-											movieId={movie.id}
-											movieName={movie.original_title}
-											/>
-									</Fragment>
-								))}
-							</Row>
-							<div style={{ display: 'flex', justifyContent: 'center'}}>
-							<button onClick={loadMoreItem}>Load More</button>
-							</div>
+							
 						</div>
-					</div>					
+							
 					</div>
 					
         </div>
