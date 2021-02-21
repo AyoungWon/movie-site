@@ -1,14 +1,15 @@
 import React from 'react'
-import Icon from '@ant-design/icons'
+
 
 function Footer() {
     return (
         <div style={{
-            height: '80px', display: 'flex',
-            flexDirection: 'column', alignItems: 'center',
-            justifyContent: 'center', fontSize:'1rem'
+            height: '50px', display: 'flex',
+            alignItems: 'center', marginTop: '50px',
+            justifyContent: 'center', fontSize:'1rem',
+            backgroundColor : '#ffbe44'
         }}>
-           <p> Happy Coding  <Icon type="smile" /></p>
+           <p style={{marginBottom: '0', color:'#fff'}}>Wayne © All rights reserved</p>
         </div>
     )
 }

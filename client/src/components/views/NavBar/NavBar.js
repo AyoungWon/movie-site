@@ -1,8 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import LeftMenu from './Sections/LeftMenu';
+import SearchMenu from './Sections/SearchMenu';
 import RightMenu from './Sections/RightMenu';
-import { Drawer, Button } from 'antd';
-import Icon, { AlignRightOutlined } from '@ant-design/icons'
+import { Drawer} from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faBars} from '@fortawesome/free-solid-svg-icons'
 import './Sections/Navbar.css';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config'
 import GenreList from './Sections/GenreList';
@@ -13,6 +14,7 @@ function NavBar() {
   const [visibleTop, setvisibleTop] = useState(false)
   const [placement, setplacement] = useState('top')
   const [Genres, setGenres] = useState([])
+  const [CategoryVisible, setCategoryVisible] = useState(false)
   
   useEffect(() => {
     const genreList = `${API_URL}/genre/movie/list?api_key=${API_KEY}&language=ko`
@@ -38,6 +40,10 @@ function NavBar() {
     setvisibleTop(false)
   };
 
+  const onClickCategory = () => {
+    setCategoryVisible(!CategoryVisible)
+  }
+
   return (
     <nav >
     <div className="menu">
@@ -50,37 +56,46 @@ function NavBar() {
         <h1>Movie Pop</h1>
         </a>
       </div>
-     
-        <div className="menu_left" >
-          <LeftMenu/>
+        <div className="menu_search" >
+          <SearchMenu/>
           <button id="category" onClick={showDrawerTop} >Category</button>
         </div>
         <div className="menu_right" >
           <RightMenu/>
         </div>
-        <Button
-          className="menu__mobile-button"
+        <button
+          className="menu-btn-mobile"
           type="primary"
           onClick={showDrawer}
         >
-          <AlignRightOutlined />
-        </Button>
+          <FontAwesomeIcon icon={faBars}/>
+        </button>
         <Drawer
-          title="Basic Drawer"
+          title="Menu"
           placement="right"
           className="menu_drawer"
           closable={false}
           onClose={onClose}
           visible={visible}
         >
-          <button onClick={showDrawerTop} >Category</button>
           <RightMenu mode="inline" />
+          <SearchMenu/>
+          <button id="categoryBtn" onClick={onClickCategory}>Category</button>
+          {CategoryVisible ? (
+          <ul id="mobile-category">
+            {Genres.map((genre, index)=> (
+              <Fragment key={index}>
+                <GenreList genre={genre}/>
+              </Fragment>
+            ))}
+          </ul>) : null}
+          
         </Drawer>
       
     </div>
-    <div>
+    <div className="genre-catecory">
     <Drawer
-          title="Genres"
+          title="Category"
           placement={placement}
           closable={false}
           onClose={onCloseTop}

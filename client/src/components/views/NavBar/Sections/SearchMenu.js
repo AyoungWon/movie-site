@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-function LeftMenu(props) {
+function SearchMenu(props) {
   const [Search, setSerch] = useState()
 
   const onChangeSerch = (e) => {
@@ -19,7 +19,7 @@ function LeftMenu(props) {
     e.preventDefault() 
     if(Search){
       let movieName = Search.replaceAll(' ', '+')
-      window.location.href=`movie/search/${movieName}`
+      window.location.href=`/movie/search/${movieName}`
     }
     
   }
@@ -33,7 +33,7 @@ function LeftMenu(props) {
         value={Search} 
         onKeyDown={enterHandler}
         onChange={onChangeSerch} 
-        placeholder='Search'
+        placeholder='영화 검색'
         ></input>
         <button 
         className="search-btn"
@@ -47,4 +47,4 @@ function LeftMenu(props) {
   )
 }
 
-export default LeftMenu
+export default SearchMenu

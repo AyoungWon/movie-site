@@ -1,13 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import { Row} from 'antd';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config'
 import GridCards from '../Commons/GridCards'
 import SlideCards from '../Commons/SlideCards'
-import MainImage from '../../views/LandingPage/Sections/MainImage';
+import MainImage from '../Commons/MainImage';
 import Favorite from './Sections/Favorite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons'
-import '../Commons/GridCards.css'
 import './MovieDetail.css'
 
 function MovieDetailPage(props) {
@@ -17,7 +15,7 @@ function MovieDetailPage(props) {
     const [Casts, setCasts] = useState([])
     const [TrailerKey, setTrailerKey] = useState()
     const [SimilarMovies, setSimilarMovies] = useState([])
-    const [ActorToggle, setActorToggle] = useState(false)
+    const [SimilarToggle, setSimilarToggle] = useState(false)
     const [Director, setDirector] = useState('')
 
 
@@ -31,12 +29,12 @@ useEffect(() => {
     fetch(endpointInfo)
       .then(response => response.json())
       .then(response => {
-        console.log(response)
         setMovie(response)
       })
     fetch(endpointCrew)
       .then(response => response.json())
       .then(response => {
+        console.log(response.cast)
         let directors = [];
         response.crew.forEach(function(entry){
           if (entry.job === 'Director') {
@@ -56,14 +54,13 @@ useEffect(() => {
       fetch(endpointSimilar)
       .then(response => response.json())
       .then(response => {
-        console.log(response)
         setSimilarMovies(response.results)
       })
 
   }, [])
 
-    const toggleActorView = () => {
-        setActorToggle(!ActorToggle)
+    const toggleSimilarView = () => {
+        setSimilarToggle(!SimilarToggle)
     }
 
 
@@ -111,7 +108,7 @@ useEffect(() => {
                         `${IMAGE_BASE_URL}w500${cast.profile_path}`: null}
                       characterName={cast.character}
                       actorName={cast.name}
-
+                      gender={cast.gender}
 											/>
 										</Fragment>
 											))}
@@ -120,22 +117,22 @@ useEffect(() => {
 							</div>
 
         <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem'}}>
-          <button id="actorViewBtn" onClick={toggleActorView}>비슷한 영화 추천 <FontAwesomeIcon icon={faArrowDown}/></button>
+          <button id="actorViewBtn" onClick={toggleSimilarView}>비슷한 영화 추천 <FontAwesomeIcon icon={faArrowDown}/></button>
         </div>
-        {ActorToggle &&
-                <div className="grid-card-wrap">
-                {SimilarMovies && SimilarMovies.map((movie,index) => (
-                  <Fragment key={index}>
-                    <GridCards 
-                      landingPage
-                      image={movie.poster_path ?
-                        `${IMAGE_BASE_URL}w500${movie.poster_path}`: null}
-                      movieId={movie.id}
-                      movieName={movie.original_title}
-                      />
-                  </Fragment>
-                ))}
-              </div>
+        {SimilarToggle &&
+          <div className="grid-card-wrap">
+          {SimilarMovies && SimilarMovies.map((movie,index) => (
+            <Fragment key={index}>
+              <GridCards 
+                landingPage
+                image={movie.poster_path ?
+                  `${IMAGE_BASE_URL}w500${movie.poster_path}`: null}
+                movieId={movie.id}
+                movieName={movie.original_title}
+                />
+            </Fragment>
+          ))}
+        </div>
         }
 
       </div>

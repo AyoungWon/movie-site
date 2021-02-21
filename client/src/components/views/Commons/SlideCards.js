@@ -1,4 +1,5 @@
 import React from 'react'
+import './SlideCards.css'
 
 function SlideCards(props) {
   if(props.landingPage){
@@ -20,8 +21,9 @@ function SlideCards(props) {
     return (
       <li className="slide-card">
         <div className="card-wrapper" style={{width:'200px'}}>
-          <img style={{width:'100%', height:'240px'}} 
-          src={props.image} 
+          
+          <img style={props.image ? {width:'100%', height:'240px'}: {width:'70%', height:'240px', padding: '30px 0px'}} 
+          src={props.image ? (props.image) : ("/img/businessman.png") } 
           alt={props.actorName}/>
         </div>
         <h2 className="actor">{props.actorName}</h2>

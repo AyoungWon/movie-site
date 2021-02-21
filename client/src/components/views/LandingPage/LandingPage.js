@@ -1,22 +1,15 @@
 import React,{useEffect, useState, Fragment} from 'react'
-import { FaCode } from "react-icons/fa";
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
-import MainImage from './Sections/MainImage';
-import GridCards from '../Commons/GridCards'
-import {Row, Carousel} from 'antd'
+import MainImage from '../Commons/MainImage';
 import { withRouter } from 'react-router-dom'
 import SlideCards from '../Commons/SlideCards';
-import '../Commons/SlideCard.css'
 import '../Commons/GridCards.css'
 
 
 function LandingPage() {
-
 	const [Movies, setMovies] = useState([])
 	const [MainMovieImage, setMainMovieImage] = useState(null)
-	const [CurrentPage, setCurrentPage] = useState(0)
 	const [PlayingMovie, setPlayingMovie] = useState([])
-
 	const [HotMovies, setHotMovies] = useState([])
 	
 
@@ -32,11 +25,7 @@ function LandingPage() {
 		.then(response => response.json())
 		.then(response => {
 			setPlayingMovie([...response.results])
-			console.log(response)
 		})
-
-			
-		
 	}
 
 	const fetchMoviesHot = (endpoint) => {
@@ -45,14 +34,9 @@ function LandingPage() {
 		.then(response => {
 			setMainMovieImage(response.results[0])
 			setHotMovies([...HotMovies,...response.results])
-			setCurrentPage(response.page)
 		})
 	}
 
-	const loadMoreItem = () => {
-		const endpoint = 	`${API_URL}/trending/movie/week?api_key=${API_KEY}&&language=en-US&page=${CurrentPage + 1}`
-		fetchMoviesHot(endpoint)
-	}
     return (
 			<div style={{width: '100%', margin: '0'}}>
 				{MainMovieImage && <MainImage 
@@ -108,11 +92,8 @@ function LandingPage() {
 									</ul>
 								</div>
 							</div>
-							
 						</div>
-							
 					</div>
-					
         </div>
     )
 }

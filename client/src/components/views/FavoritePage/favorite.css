@@ -1,16 +1,35 @@
-table {
-  font-family: Arial, Helvetica, sans-serif;
+#favorite-list {
+ margin-top: 50px;
   border-collapse: collapse;
   width: 100%;
 }
 
-td,
-th {
+#favorite-list td,
+#favorite-list th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
+#favorite-list tr:nth-child(even) {
+  background-color: #fff0d4;
+}
+
+#favorite-list thead {
+background-color: #ffbe44;
+}
+
+#favorite-list button {
+  border: none;
+  color: #ffbe44;
+  background-color: transparent;
+}
+#favorite-list button:hover {
+
+  color: #d18a07;
+
+}
+
+#favorite-list p {
+  margin-bottom: 0 !important;
 }

@@ -2,14 +2,15 @@
 .grid-card-wrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+ /*  justify-content: space-around; */
+ 
 }
 
 .card {
   position:relative; 
   border: 1px solid black;
   width: calc(20% - 0.5rem);
-  margin-bottom: 0.5rem;
+  margin: 0.25em;
 }
 
 .card .ranking {

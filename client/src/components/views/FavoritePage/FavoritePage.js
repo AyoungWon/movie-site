@@ -3,6 +3,8 @@ import './favorite.css';
 import axios from 'axios';
 import { Popover } from 'antd';
 import { IMAGE_BASE_URL } from '../../Config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -40,25 +42,25 @@ function FavoritePage() {
     })
   }
   return (
-  <div style={{ width: '85%', margin: '3rem auto' }}>
+  <div style={{ width: '75%', margin: '3rem auto' }}>
     <h2> Favorite Movies </h2>
     <hr />
 
-    <table>
+    <table id="favorite-list">
         <thead>
             <tr>
                 <th>Movie Title</th>
-                <th>Movie RunTime</th>
-                <td>Remove from favorites</td>
+                
             </tr>
         </thead>
         <tbody>
 
         {Favorites.map((favorite, index) => (
           <tr key={index}>
-            <td>{favorite.movieTitle}</td>
-            <td>{favorite.movieRunTime}</td>
-            <td><button onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}>Remove</button></td>
+            <td style={{display: 'flex', alignItems:'center', justifyContent:'space-between'}}>
+              <a href={`/movie/${favorite.movieId}`} style={{}}>{favorite.movieTitle}</a>
+              <button onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}><FontAwesomeIcon icon={faTrashAlt}/></button></td>
+            
           </tr>
         ))}
 

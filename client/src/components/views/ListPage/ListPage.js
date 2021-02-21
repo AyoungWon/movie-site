@@ -1,8 +1,6 @@
 import React,{useState, useEffect, Fragment} from 'react'
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config'
 import GridCards from '../Commons/GridCards'
-import {Row,} from 'antd'
-import '../Commons/GridCards.css'
 
 
 function ListPage(props) {
@@ -59,7 +57,7 @@ function ListPage(props) {
         ))}
       </div>
       {PageNumber > 1 ? (<div style={{ display: 'flex', justifyContent: 'center'}}>
-        <button onClick={loadMoreItem}>Load More</button>
+        <button style={{  border: 'none',color: '#777',padding: '0.25rem 0.5rem',borderRadius: '4px', marginTop :'1rem'}} onClick={loadMoreItem}>Load More</button>
       </div>) : null}
       
     </div>
