@@ -1,5 +1,5 @@
 const express = require("express");
-let cors = require('cors')
+const cors = require('cors')
 const app = express();
 const path = require("path");
 
@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
-let cors_origin = [`https://pop-movie.netlify.app`];
+const cors_origin = `https://pop-movie.netlify.app`;
 // const mongoose = require("mongoose");
 // mongoose
 //   .connect(config.mongoURI, { useNewUrlParser: true })
@@ -24,7 +24,7 @@ const connect = mongoose.connect(config.mongoURI,
   .catch(err => console.log(err));
 
 
-  app.use(cors())
+ // app.use(cors())
 app.use(cors({
 
   origin: cors_origin, // 허락하고자 하는 요청 주소
