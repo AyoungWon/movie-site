@@ -42,7 +42,7 @@ function LandingPage() {
 				{MainMovieImage && <MainImage 
 				landingPage
 				image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`}
-				title={MainMovieImage.original_title}
+				title={MainMovieImage.title}
 				text={MainMovieImage.overview}/>
 				}
 				<div style={{ width : '85%', margin: '1rem auto'}}>	
@@ -84,7 +84,7 @@ function LandingPage() {
 											image={movie.poster_path ?
 											`${IMAGE_BASE_URL}w300${movie.poster_path}`: null}
 											movieId={movie.id}
-											movieName={movie.original_title}
+											movieName={movie.title}
 											score={movie.vote_average}
 											/>
 										</Fragment>
