@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
-
+let cors_origin = [`https://pop-movie.netlify.app/`];
 // const mongoose = require("mongoose");
 // mongoose
 //   .connect(config.mongoURI, { useNewUrlParser: true })
@@ -23,7 +23,13 @@ const connect = mongoose.connect(config.mongoURI,
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-app.use(cors())
+app.use(cors({
+
+  origin: cors_origin, // 허락하고자 하는 요청 주소
+
+  credentials: true, // true로 하면 설정한 내용을 response 헤더에 추가 해줍니다.
+
+}))
 
 //to not get any deprecation warning or error
 //support parsing of application/x-www-form-urlencoded post data
