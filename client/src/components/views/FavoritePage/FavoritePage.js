@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './favorite.css';
 import axios from 'axios';
-import { Popover } from 'antd';
 import { IMAGE_BASE_URL } from '../../Config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -16,7 +15,7 @@ function FavoritePage() {
   }, [])
 
   const fetchFavorite = () => {
-    axios.post('/api/favorite/getFavoritedMovie', {userFrom: localStorage.getItem('userId')})
+    axios.post('https://wayne-movie.herokuapp.com/api/favorite/getFavoritedMovie', {userFrom: localStorage.getItem('userId')})
     .then(response => {
       if( response.data.success){
         console.log(response.data.favorites)
@@ -32,7 +31,7 @@ function FavoritePage() {
       movieId,
       userFrom
     }
-    axios.post('/api/favorite/removeFromFavorite', value)
+    axios.post('https://wayne-movie.herokuapp.com/api/favorite/removeFromFavorite', value)
     .then(response=> {
       if(response.data.success){
         fetchFavorite()

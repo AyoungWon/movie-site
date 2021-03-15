@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://git.heroku.com/wayne-movie.git',
+            target: 'https://wayne-movie.herokuapp.com/',
             changeOrigin: true,
         })
     );
