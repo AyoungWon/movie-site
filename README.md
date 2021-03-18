@@ -5,7 +5,7 @@ POP MOVIE는 현재 인기있는 영화 순위 리스트 및 영화 검색을 �
 
 ## Let's see
 <img src="/README.assets/asset2.png"  width="300px" height="200px">
-* youtube: <https://youtu.be/BaQYYrIMfUw>
+* [youtube](https://youtu.be/BaQYYrIMfUw)
 
 ***
 
