@@ -23,7 +23,7 @@ let variables = {
   useEffect(() => {
 
    
-    axios.post('/api/favorite/favoriteNumber', variables)
+    axios.post('https://wayne-movie.herokuapp.com/api/favorite/favoriteNumber', variables)
     .then(response => {
       if(response.data.success){
         console.log(response.data)
@@ -32,7 +32,7 @@ let variables = {
         alert('숫자 정보를 가져오는데 실패헸습니다.')
       }
     })
-    axios.post('/api/favorite/favorited', variables)
+    axios.post('https://wayne-movie.herokuapp.com/api/favorite/favorited', variables)
     .then(response => {
       if(response.data.success){
         console.log('favorited', response.data)
@@ -45,7 +45,7 @@ let variables = {
 
   const onClickFavorite = () => {
     if(Favorited){
-      axios.post('/api/favorite/removeFromFavorite', variables)
+      axios.post('https://wayne-movie.herokuapp.com/api/favorite/removeFromFavorite', variables)
       .then(response => {
         console.log(response.data)
         if(response.data.success){
@@ -56,7 +56,7 @@ let variables = {
         }
       })
     } else {
-      axios.post('/api/favorite/addToFavorite', variables)
+      axios.post('https://wayne-movie.herokuapp.com/api/favorite/addToFavorite', variables)
       .then(response => {
         if(response.data.success){
           setFavoriteNumber(FavoriteNumber + 1)
